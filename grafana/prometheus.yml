@@ -1,0 +1,11 @@
+# Drop this into your Prometheus install as prometheus.yml.
+# It scrapes the store's /metrics endpoint every 15s.
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: cleanspin
+    metrics_path: /metrics
+    static_configs:
+      - targets: ['host.docker.internal:3000']
+        # If running Prometheus on the same host without Docker, use 'localhost:3000'.

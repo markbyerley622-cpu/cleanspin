@@ -1,0 +1,8 @@
+node_modules/
+.env
+data/events.jsonl
+*.log
+.DS_Store
+
+# local Claude Code settings (per-machine; not for source control)
+.claude/settings.local.json

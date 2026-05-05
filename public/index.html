@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<meta name="theme-color" content="#0b0b0f" />
+<title>CleanSpin — Stop Scrubbing. Start Spinning.</title>
+<meta name="description" content="The cordless spin scrubber that does the work for you. Tile, grout, sinks, tubs — gone in seconds. 30-day money back. Ships fast." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&family=Bangers&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+
+<!-- ===== LOGO (reused across the page) ===== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="brandGrad" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#ff3b6b"/>
+      <stop offset="1" stop-color="#ffb14a"/>
+    </linearGradient>
+    <symbol id="brandMark" viewBox="0 0 40 40">
+      <circle cx="20" cy="20" r="17" fill="none" stroke="url(#brandGrad)" stroke-width="3"/>
+      <path d="M20 6 A14 14 0 0 1 34 20" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="20" cy="20" r="5" fill="url(#brandGrad)"/>
+      <circle cx="20" cy="20" r="1.6" fill="#0b0b0f"/>
+    </symbol>
+  </defs>
+</svg>
+
+<header class="topbar">
+  <div class="wrap topbar-row">
+    <a class="brand" href="/">
+      <svg class="brand-mark" aria-hidden="true"><use href="#brandMark"/></svg>
+      <span class="brand-name">Clean<span class="brand-name-accent">Spin</span></span>
+    </a>
+    <div class="topbar-meta">
+      <span class="ship-pill">⚡ Free shipping today</span>
+    </div>
+  </div>
+</header>
+
+<!-- ============== HERO ============== -->
+<section class="hero reveal">
+  <div class="bg-blob bg-blob-1"></div>
+  <div class="bg-blob bg-blob-2"></div>
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <span class="badge">⭐ As seen on TikTok #tiktokmademebuyit</span>
+      <h1>Stop Scrubbing.<br/><span class="grad">Start Spinning.</span></h1>
+      <p class="sub">Cordless electric spin brush. 4 swappable heads. Cleans tile, grout, sinks &amp; tubs in seconds — no bending, no sweating, no chemicals.</p>
+
+      <div class="price-row">
+        <span class="price-old">$59.99</span>
+        <span class="price-new">$29.99</span>
+        <span class="price-save">SAVE 50%</span>
+      </div>
+
+      <div class="cta-row">
+        <button id="buyBtn" class="btn btn-primary"><span class="btn-glow"></span>Buy Now — $29.99</button>
+        <a id="waBtn" class="btn btn-wa" href="#" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 3.5A11 11 0 0 0 3.6 17.2L2 22l4.9-1.6A11 11 0 1 0 20.5 3.5ZM12 20a8 8 0 0 1-4.1-1.1l-.3-.2-2.9.9.9-2.8-.2-.3A8 8 0 1 1 12 20Zm4.5-5.9c-.2-.1-1.4-.7-1.6-.8s-.4-.1-.5.1l-.7.9c-.1.2-.3.2-.5.1a6.5 6.5 0 0 1-3.2-2.8c-.2-.4.2-.4.6-1.2a.5.5 0 0 0 0-.5l-.7-1.7c-.2-.4-.4-.4-.5-.4h-.5a.9.9 0 0 0-.7.3 2.8 2.8 0 0 0-.9 2.1c0 1.2.9 2.4 1 2.6s1.7 2.7 4.2 3.7c.6.3 1 .4 1.4.5a3.3 3.3 0 0 0 1.5.1 2.5 2.5 0 0 0 1.6-1.1 2 2 0 0 0 .1-1.1c0-.1-.2-.2-.4-.3Z"/></svg>
+          Order on WhatsApp
+        </a>
+      </div>
+
+      <ul class="trust">
+        <li><span class="check">✓</span> 30-day money back</li>
+        <li><span class="check">✓</span> Ships in 24 hrs</li>
+        <li><span class="check">✓</span> 12,400+ sold</li>
+      </ul>
+    </div>
+
+    <div class="hero-media">
+      <div class="phone">
+        <div class="phone-notch"></div>
+        <div class="ugc">
+          <video class="ugc-video"
+                 muted playsinline loop autoplay preload="metadata"
+                 data-src="/videos/snaptik_7372254362460097835_v3.mp4"
+                 data-start="0" data-end="6"></video>
+          <div class="ugc-caption">"This made cleaning <em>10x easier</em> 😭"</div>
+          <div class="ugc-tag">@kate_cleanhome</div>
+          <div class="phone-fx"></div>
+        </div>
+      </div>
+      <div class="float-tag float-tag-1">⚡ 300 RPM</div>
+      <div class="float-tag float-tag-2">💧 Waterproof</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== TICKER ============== -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span>#tiktokmademebuyit</span><span>·</span>
+    <span>#cleaninghacks</span><span>·</span>
+    <span>#viralproduct</span><span>·</span>
+    <span>#homegadgets</span><span>·</span>
+    <span>#satisfying</span><span>·</span>
+    <span>#tiktokmademebuyit</span><span>·</span>
+    <span>#cleaninghacks</span><span>·</span>
+    <span>#viralproduct</span><span>·</span>
+    <span>#homegadgets</span><span>·</span>
+    <span>#satisfying</span><span>·</span>
+  </div>
+</div>
+
+<!-- ============== UGC WALL ============== -->
+<section class="ugc-wall reveal">
+  <div class="wrap">
+    <h2>Real people. <span class="grad">Real results.</span></h2>
+    <p class="muted">Trending on TikTok — these clips made <strong>12,400+</strong> people hit Buy.</p>
+
+    <div class="ugc-grid">
+      <!-- Same 3 source videos, sliced into 6 different segments -->
+      <div class="ugc-card" style="--rot:-1.2deg">
+        <video muted playsinline loop preload="none"
+               data-src="/videos/snaptik_7372254362460097835_v3.mp4"
+               data-start="0" data-end="5"></video>
+        <div class="ugc-overlay"><div class="hook">Why didn't I buy this <em>sooner??</em></div><div class="hook-sub">@kate_cleanhome</div></div>
+      </div>
+      <div class="ugc-card" style="--rot:0.8deg">
+        <video muted playsinline loop preload="none"
+               data-src="/videos/snaptik_7520696142154173701_v3.mp4"
+               data-start="0" data-end="5"></video>
+        <div class="ugc-overlay"><div class="hook">Watch it remove stains <em>instantly</em></div><div class="hook-sub">@stephaniarahme</div></div>
+      </div>
+      <div class="ugc-card" style="--rot:-0.6deg">
+        <video muted playsinline loop preload="none"
+               data-src="/videos/snaptik_7594701902839893256_v3.mp4"
+               data-start="0" data-end="4"></video>
+        <div class="ugc-overlay"><div class="hook">POV: you finally clean the grout</div><div class="hook-sub">@quick.cleannn</div></div>
+      </div>
+      <div class="ugc-card" style="--rot:1deg">
+        <video muted playsinline loop preload="none"
+               data-src="/videos/snaptik_7372254362460097835_v3.mp4"
+               data-start="8" data-end="14"></video>
+        <div class="ugc-overlay"><div class="hook">Tell me this isn't <em>satisfying</em></div><div class="hook-sub">@kate_cleanhome</div></div>
+      </div>
+      <div class="ugc-card" style="--rot:-0.9deg">
+        <video muted playsinline loop preload="none"
+               data-src="/videos/snaptik_7520696142154173701_v3.mp4"
+               data-start="6" data-end="11"></video>
+        <div class="ugc-overlay"><div class="hook">My bathroom in <em>90 seconds</em></div><div class="hook-sub">@stephaniarahme</div></div>
+      </div>
+      <div class="ugc-card" style="--rot:0.7deg">
+        <video muted playsinline loop preload="none"
+               data-src="/videos/snaptik_7594701902839893256_v3.mp4"
+               data-start="4" data-end="9"></video>
+        <div class="ugc-overlay"><div class="hook">Goodbye, <em>sponge era</em> 👋</div><div class="hook-sub">@quick.cleannn</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== COMIC BOOK BEFORE/AFTER ============== -->
+<section class="comic reveal">
+  <div class="wrap">
+    <h2 class="comic-title">Before vs After <span class="boom">BAM!</span></h2>
+    <p class="muted comic-sub">Same tile. <em>60 seconds</em> apart. No filters.</p>
+
+    <div class="comic-grid">
+      <figure class="comic-panel comic-panel-before">
+        <div class="comic-art">
+          <img class="ba-img ba-img-left" src="/assets/before-after.jpg" alt="Dirty bathroom tile before cleaning" loading="lazy" />
+        </div>
+        <div class="comic-halftone"></div>
+        <div class="comic-label">BEFORE</div>
+        <div class="comic-bubble comic-bubble-yikes">YIKES!</div>
+        <figcaption>Stained grout, soap scum, regret.</figcaption>
+      </figure>
+
+      <div class="comic-arrow" aria-hidden="true">
+        <svg viewBox="0 0 80 60" width="80" height="60">
+          <path d="M5 30 Q 35 -5 70 30" fill="none" stroke="#000" stroke-width="4" stroke-linecap="round"/>
+          <path d="M58 22 L 72 30 L 60 38" fill="none" stroke="#000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <figure class="comic-panel comic-panel-after">
+        <div class="comic-art">
+          <img class="ba-img ba-img-right" src="/assets/before-after.jpg" alt="Clean tile after using CleanSpin" loading="lazy" />
+          <span class="sparkle sparkle-1">✦</span>
+          <span class="sparkle sparkle-2">✧</span>
+          <span class="sparkle sparkle-3">✦</span>
+          <span class="sparkle sparkle-4">✧</span>
+        </div>
+        <div class="comic-halftone"></div>
+        <div class="comic-label comic-label-after">AFTER</div>
+        <div class="comic-burst">
+          <div class="comic-burst-text">POW!</div>
+        </div>
+        <figcaption>One pass. No scrubbing. Brand new.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============== WHY IT WORKS ============== -->
+<section class="why reveal">
+  <div class="wrap">
+    <h2>Why it works</h2>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-ico">⚡</div>
+        <h3>300 RPM Motor</h3>
+        <p>Hits dirt harder than your hand ever could.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-ico">💧</div>
+        <h3>Fully Waterproof</h3>
+        <p>Use it in the tub, the shower, even outside.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-ico">🔋</div>
+        <h3>90-Min Battery</h3>
+        <p>Cordless USB-C charge. Whole house, one charge.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-ico">🧽</div>
+        <h3>4 Brush Heads</h3>
+        <p>Tile, grout, corners, glass — one tool does it all.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== REVIEWS MARQUEE ============== -->
+<section class="reviews reveal">
+  <div class="wrap reviews-head">
+    <h2>4.8 ★ from <span class="grad">2,300+ buyers</span></h2>
+    <p class="muted">Verified reviews from real customers. No filter, no edits.</p>
+  </div>
+
+  <div class="marquee">
+    <div class="marquee-track">
+      <!-- duplicated for seamless loop -->
+      <article class="review-card">
+        <div class="r-head"><div class="r-avatar" style="--c1:#ff3b6b;--c2:#ffb14a">SM</div><div><div class="r-name">Sara M. <span class="r-verified">✓ Verified</span></div><div class="stars">★★★★★ <span class="r-date">2 days ago</span></div></div></div>
+        <p>"I genuinely wasn't expecting much. My shower looks brand new. I'm telling everyone."</p>
+      </article>
+      <article class="review-card">
+        <div class="r-head"><div class="r-avatar" style="--c1:#5eead4;--c2:#3b82f6">JR</div><div><div class="r-name">James R. <span class="r-verified">✓ Verified</span></div><div class="stars">★★★★★ <span class="r-date">5 days ago</span></div></div></div>
+        <p>"Battery lasts forever. Got the kitchen, two bathrooms, and the patio in one go."</p>
+      </article>
+      <article class="review-card">
+        <div class="r-head"><div class="r-avatar" style="--c1:#a855f7;--c2:#ec4899">AK</div><div><div class="r-name">Aisha K. <span class="r-verified">✓ Verified</span></div><div class="stars">★★★★★ <span class="r-date">1 week ago</span></div></div></div>
+        <p>"My back doesn't hurt anymore lol. The extension handle is a game changer."</p>
+      </article>
+      <article class="review-card">
+        <div class="r-head"><div class="r-avatar" style="--c1:#22c55e;--c2:#84cc16">DT</div><div><div class="r-name">Dan T. <span class="r-verified">✓ Verified</span></div><div class="stars">★★★★☆ <span class="r-date">1 week ago</span></div></div></div>
+        <p>"Wish I bought two. Replaced four cleaning products with this one tool."</p>
+      </article>
+      <article class="review-card">
+        <div class="r-head"><div class="r-avatar" style="--c1:#f59e0b;--c2:#ef4444">PN</div><div><div class="r-name">Priya N. <span class="r-verified">✓ Verified</span></div><div class="stars">★★★★★ <span class="r-date">2 weeks ago</span></div></div></div>
+        <p>"Grout was disgusting before this. Now it looks like the day we moved in."</p>
+      </article>
+      <article class="review-card">
+        <div class="r-head"><div class="r-avatar" style="--c1:#06b6d4;--c2:#6366f1">MH</div><div><div class="r-name">Mark H. <span class="r-verified">✓ Verified</span></div><div class="stars">★★★★★ <span class="r-date">3 weeks ago</span></div></div></div>
+        <p>"The 'satisfying' TikToks are real. I clean for fun now. Help."</p>
+      </article>
+    </div>
+  </div>
+
+  <div class="marquee marquee-rev">
+    <div class="marquee-track">
+      <article class="review-card">
+        <div class="r-head"><div class="r-avatar" style="--c1:#ec4899;--c2:#8b5cf6">LW</div><div><div class="r-name">Lena W. <span class="r-verified">✓ Verified</span></div><div class="stars">★★★★★ <span class="r-date">2 days ago</span></div></div></div>
+        <p>"Worth every cent. The corner brush gets places I never reached before."</p>
+      </article>
+      <article class="review-card">
+        <div class="r-head"><div class="r-avatar" style="--c1:#f97316;--c2:#facc15">CB</div><div><div class="r-name">Carlos B. <span class="r-verified">✓ Verified</span></div><div class="stars">★★★★★ <span class="r-date">4 days ago</span></div></div></div>
+        <p>"Bought it for the kitchen sink. Ended up cleaning the whole house. Addictive."</p>
+      </article>
+      <article class="review-card">
+        <div class="r-head"><div class="r-avatar" style="--c1:#10b981;--c2:#06b6d4">EJ</div><div><div class="r-name">Emily J. <span class="r-verified">✓ Verified</span></div><div class="stars">★★★★★ <span class="r-date">1 week ago</span></div></div></div>
+        <p>"My husband finally helps clean. He says it 'feels like a power tool'. Whatever works."</p>
+      </article>
+      <article class="review-card">
+        <div class="r-head"><div class="r-avatar" style="--c1:#3b82f6;--c2:#a855f7">RS</div><div><div class="r-name">Ravi S. <span class="r-verified">✓ Verified</span></div><div class="stars">★★★★☆ <span class="r-date">2 weeks ago</span></div></div></div>
+        <p>"Quieter than I thought. Charges fast. The 4 heads cover everything."</p>
+      </article>
+      <article class="review-card">
+        <div class="r-head"><div class="r-avatar" style="--c1:#e11d48;--c2:#f59e0b">TO</div><div><div class="r-name">Tara O. <span class="r-verified">✓ Verified</span></div><div class="stars">★★★★★ <span class="r-date">3 weeks ago</span></div></div></div>
+        <p>"30 day guarantee meant zero risk. Kept it day one. Should've bought one years ago."</p>
+      </article>
+      <article class="review-card">
+        <div class="r-head"><div class="r-avatar" style="--c1:#0ea5e9;--c2:#22d3ee">NF</div><div><div class="r-name">Noor F. <span class="r-verified">✓ Verified</span></div><div class="stars">★★★★★ <span class="r-date">1 month ago</span></div></div></div>
+        <p>"The before/after on my tub grout looks fake. It's not. This thing is unreal."</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============== GUARANTEE ============== -->
+<section class="guarantee reveal">
+  <div class="wrap guarantee-wrap">
+    <div class="seal">
+      <div class="seal-inner">
+        <div class="seal-num">30</div>
+        <div class="seal-txt">DAY</div>
+      </div>
+    </div>
+    <div>
+      <h2>Risk-free 30-day guarantee</h2>
+      <p>If you don't love it, send it back. We'll refund you, no questions, no restocking fees, no shipping fees.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============== FAQ ============== -->
+<section class="faq reveal">
+  <div class="wrap">
+    <h2>Questions &amp; Answers</h2>
+    <details><summary>How fast does it ship?</summary><p>Orders ship within 24 hours. Delivery is 5–9 business days depending on location.</p></details>
+    <details><summary>How long does the battery last?</summary><p>Around 90 minutes per charge — enough for a full house. Charges via USB-C in about 2.5 hours.</p></details>
+    <details><summary>Is it durable?</summary><p>The body is impact-resistant ABS and the brushes are replaceable. Built to last.</p></details>
+    <details><summary>What's your refund policy?</summary><p>30 days, no questions. If it's not for you, we refund it — including shipping.</p></details>
+    <details><summary>Can I pay with cash on delivery?</summary><p>Yes — message us on WhatsApp and we'll arrange COD where available.</p></details>
+  </div>
+</section>
+
+<!-- ============== FINAL CTA ============== -->
+<section class="final-cta reveal">
+  <div class="wrap">
+    <h2>Cleaning, but <span class="grad">faster.</span></h2>
+    <p>Limited stock at <strong>$29.99</strong> — price goes back to $59.99 once this drop sells out.</p>
+    <div class="cta-row center">
+      <button id="buyBtn2" class="btn btn-primary"><span class="btn-glow"></span>Buy Now — $29.99</button>
+      <a id="waBtn2" class="btn btn-wa" href="#" rel="noopener">Order on WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap foot-row">
+    <div class="brand">
+      <svg class="brand-mark"><use href="#brandMark"/></svg>
+      <span class="brand-name">Clean<span class="brand-name-accent">Spin</span></span>
+    </div>
+    <span class="muted">Secure checkout via Stripe · WhatsApp orders supported · © CleanSpin</span>
+  </div>
+</footer>
+
+<!-- STICKY MOBILE CTA -->
+<div id="sticky" class="sticky-cta">
+  <div class="sticky-price">
+    <span class="sp-old">$59.99</span>
+    <span class="sp-new">$29.99</span>
+  </div>
+  <button id="buyBtnSticky" class="btn btn-primary btn-sticky"><span class="btn-glow"></span>Buy Now</button>
+</div>
+
+<script src="/app.js"></script>
+</body>
+</html>

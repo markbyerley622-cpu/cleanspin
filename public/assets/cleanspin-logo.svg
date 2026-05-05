@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024" role="img" aria-label="CleanSpin logo">
+  <defs>
+    <linearGradient id="csG" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ff3b6b"/>
+      <stop offset="1" stop-color="#ffb14a"/>
+    </linearGradient>
+    <linearGradient id="csG2" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffb14a"/>
+      <stop offset="1" stop-color="#ff3b6b"/>
+    </linearGradient>
+  </defs>
+
+  <!-- main ring -->
+  <circle cx="512" cy="512" r="400" fill="none" stroke="url(#csG)" stroke-width="88"/>
+
+  <!-- spin sweep accent (suggests motion) -->
+  <path d="M 512 112 A 400 400 0 0 1 912 512"
+        fill="none" stroke="url(#csG2)" stroke-width="88" stroke-linecap="round" opacity="0.55"/>
+
+  <!-- center filled disc -->
+  <circle cx="512" cy="512" r="160" fill="url(#csG)"/>
+
+  <!-- inner punch -->
+  <circle cx="512" cy="512" r="46" fill="#0b0b0f"/>
+</svg>

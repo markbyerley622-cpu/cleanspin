@@ -1,0 +1,15 @@
+{
+  "name": "electric-spin-brush-store",
+  "version": "1.0.0",
+  "description": "Lean dropshipping landing page for Electric Spin Cleaning Brush",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "stripe": "^14.25.0"
+  }
+}

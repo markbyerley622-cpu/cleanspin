@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>CleanSpin — Metrics</title>
+<style>
+  body{font-family:Inter,system-ui,sans-serif;background:#0b0b0f;color:#f6f7fb;margin:0;padding:24px}
+  h1{margin:0 0 6px}
+  .muted{color:#a4a8b8;margin-bottom:24px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
+  .card{background:#161824;border:1px solid #23263a;border-radius:14px;padding:16px}
+  .label{color:#a4a8b8;font-size:12px;text-transform:uppercase;letter-spacing:.06em}
+  .value{font-size:32px;font-weight:900;margin-top:6px}
+  pre{background:#0f1018;padding:14px;border-radius:10px;overflow:auto;border:1px solid #23263a}
+  .row{display:flex;gap:18px;flex-wrap:wrap;margin-top:24px}
+  .row > *{flex:1;min-width:280px}
+  a{color:#ffb14a}
+</style>
+</head>
+<body>
+<h1>CleanSpin Metrics</h1>
+<p class="muted">Live data from <code>/api/metrics.json</code> · Prometheus at <a href="/metrics" target="_blank">/metrics</a></p>
+
+<div class="grid">
+  <div class="card"><div class="label">Page views</div><div class="value" id="pv">0</div></div>
+  <div class="card"><div class="label">Buy clicks</div><div class="value" id="bc">0</div></div>
+  <div class="card"><div class="label">WhatsApp clicks</div><div class="value" id="wc">0</div></div>
+  <div class="card"><div class="label">Sales</div><div class="value" id="sales">0</div></div>
+  <div class="card"><div class="label">Buy CTR</div><div class="value" id="bctr">0%</div></div>
+  <div class="card"><div class="label">WA CTR</div><div class="value" id="wctr">0%</div></div>
+  <div class="card"><div class="label">Conversion</div><div class="value" id="cvr">0%</div></div>
+  <div class="card"><div class="label">Events logged</div><div class="value" id="ev">0</div></div>
+</div>
+
+<div class="row">
+  <div>
+    <h3>Event totals</h3>
+    <pre id="totals">loading…</pre>
+  </div>
+</div>
+
+<script>
+async function refresh() {
+  const r = await fetch('/api/metrics.json');
+  const d = await r.json();
+  document.getElementById('pv').textContent = d.pageViews;
+  document.getElementById('bc').textContent = d.buyClicks;
+  document.getElementById('wc').textContent = d.whatsappClicks;
+  document.getElementById('sales').textContent = d.sales;
+  document.getElementById('bctr').textContent = d.buyCTR + '%';
+  document.getElementById('wctr').textContent = d.whatsappCTR + '%';
+  document.getElementById('cvr').textContent = d.conversionRate + '%';
+  document.getElementById('ev').textContent = d.eventsLogged;
+  document.getElementById('totals').textContent = JSON.stringify(d.totals, null, 2);
+}
+refresh();
+setInterval(refresh, 4000);
+</script>
+</body>
+</html>
