@@ -13,10 +13,15 @@ const stripe = stripeKey && stripeKey.startsWith('sk_')
   ? require('stripe')(stripeKey)
   : null;
 
-const DATA_DIR = path.join(__dirname, 'data');
+// On Vercel only /tmp is writable; locally we keep events under ./data
+const DATA_DIR = process.env.VERCEL ? '/tmp/cleanspin' : path.join(__dirname, 'data');
 const EVENTS_FILE = path.join(DATA_DIR, 'events.jsonl');
-if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
-if (!fs.existsSync(EVENTS_FILE)) fs.writeFileSync(EVENTS_FILE, '');
+try {
+  if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
+  if (!fs.existsSync(EVENTS_FILE)) fs.writeFileSync(EVENTS_FILE, '');
+} catch (e) {
+  console.warn('events log unavailable:', e.message);
+}
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -55,7 +60,7 @@ app.post('/api/track', (req, res) => {
     ip: (req.headers['x-forwarded-for'] || req.socket.remoteAddress || '').toString().split(',')[0].trim(),
   };
   fs.appendFile(EVENTS_FILE, JSON.stringify(entry) + '\n', (err) => {
-    if (err) return res.status(500).json({ ok: false });
+    if (err) console.warn('append failed:', err.message);
     res.json({ ok: true });
   });
 });
@@ -107,15 +112,18 @@ app.post('/api/checkout', async (req, res) => {
 });
 
 function readEvents() {
-  if (!fs.existsSync(EVENTS_FILE)) return [];
-  return fs
-    .readFileSync(EVENTS_FILE, 'utf8')
-    .split('\n')
-    .filter(Boolean)
-    .map((l) => {
-      try { return JSON.parse(l); } catch { return null; }
-    })
-    .filter(Boolean);
+  try {
+    if (!fs.existsSync(EVENTS_FILE)) return [];
+    return fs
+      .readFileSync(EVENTS_FILE, 'utf8')
+      .split('\n')
+      .filter(Boolean)
+      .map((l) => { try { return JSON.parse(l); } catch { return null; } })
+      .filter(Boolean);
+  } catch (e) {
+    console.warn('readEvents failed:', e.message);
+    return [];
+  }
 }
 
 app.get('/api/metrics.json', (_req, res) => {
