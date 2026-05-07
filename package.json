@@ -1,7 +1,7 @@
 {
-  "name": "electric-spin-brush-store",
+  "name": "cleanspin-store",
   "version": "1.0.0",
-  "description": "Lean dropshipping landing page for Electric Spin Cleaning Brush",
+  "description": "CleanSpin landing page — Shopify cart permalink checkout",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -9,7 +9,6 @@
   },
   "dependencies": {
     "dotenv": "^16.4.5",
-    "express": "^4.19.2",
-    "stripe": "^14.25.0"
+    "express": "^4.19.2"
   }
 }

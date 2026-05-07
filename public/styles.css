@@ -43,7 +43,11 @@ strong{color:#fff}
 
 /* ===== brand / logo ===== */
 .brand{display:inline-flex;align-items:center;gap:10px;text-decoration:none;color:inherit}
-.brand-mark{width:28px;height:28px;flex:0 0 auto;animation:spin 8s linear infinite}
+.brand-mark{
+  width:38px;height:38px;flex:0 0 auto;
+  object-fit:contain;
+  filter:brightness(0) invert(1);
+}
 .brand-name{font-family:var(--display);font-weight:800;font-size:20px;letter-spacing:-0.02em}
 .brand-name-accent{
   background:linear-gradient(90deg,#ff3b6b,#ffb14a);
@@ -86,6 +90,62 @@ strong{color:#fff}
 .price-old{color:var(--muted);text-decoration:line-through;font-size:18px}
 .price-new{font-family:var(--display);font-size:38px;font-weight:800;letter-spacing:-0.02em}
 .price-save{background:var(--accent);color:#fff;font-weight:800;font-size:11px;padding:5px 9px;border-radius:6px;letter-spacing:.05em}
+
+/* ===== bundle selector ===== */
+.bundles{
+  display:grid;grid-template-columns:1fr;gap:8px;margin:6px 0 18px;
+  max-width:540px;
+}
+.bundle-option{
+  position:relative;display:flex;align-items:center;gap:14px;
+  width:100%;text-align:left;cursor:pointer;
+  background:rgba(255,255,255,.03);
+  border:1.5px solid var(--line);border-radius:14px;
+  padding:14px 16px;
+  color:var(--fg);font-family:inherit;
+  transition:border-color .18s ease, background .18s ease, transform .12s ease;
+}
+.bundle-option:hover{border-color:rgba(255,177,74,.5)}
+.bundle-option.selected{
+  border-color:#ff3b6b;
+  background:linear-gradient(180deg,rgba(255,59,107,.08),rgba(255,177,74,.04));
+  box-shadow:0 0 0 3px rgba(255,59,107,.18);
+}
+.bundle-option:active{transform:scale(.995)}
+.bundle-radio{
+  flex:0 0 auto;width:20px;height:20px;border-radius:50%;
+  border:2px solid var(--line);background:#0b0b0f;
+  position:relative;
+  transition:border-color .18s ease;
+}
+.bundle-option.selected .bundle-radio{border-color:#ff3b6b}
+.bundle-option.selected .bundle-radio::after{
+  content:"";position:absolute;inset:3px;border-radius:50%;
+  background:linear-gradient(135deg,#ff3b6b,#ffb14a);
+}
+.bundle-body{display:flex;align-items:center;justify-content:space-between;gap:10px;flex:1;min-width:0}
+.bundle-row-1{display:flex;flex-direction:column;gap:2px;min-width:0}
+.bundle-tag{font-family:var(--display);font-weight:800;font-size:16px;letter-spacing:-0.01em}
+.bundle-meta{font-size:12px;color:var(--muted);line-height:1.25}
+.bundle-prices{display:flex;flex-direction:column;align-items:flex-end;gap:0;flex:0 0 auto}
+.bundle-old{color:var(--muted);text-decoration:line-through;font-size:12px;line-height:1}
+.bundle-new{font-family:var(--display);font-weight:800;font-size:20px;letter-spacing:-0.01em;line-height:1.1}
+.bundle-flag{
+  position:absolute;top:-9px;left:14px;
+  background:linear-gradient(90deg,#ff3b6b,#ffb14a);
+  color:#fff;font-family:var(--display);font-weight:700;font-size:10.5px;
+  padding:3px 8px;border-radius:999px;letter-spacing:.04em;text-transform:uppercase;
+  box-shadow:0 4px 10px rgba(255,59,107,.35);
+}
+.bundle-flag-best{background:linear-gradient(90deg,#22c55e,#84cc16);box-shadow:0 4px 10px rgba(34,197,94,.35)}
+.bundle-popular{border-color:rgba(255,59,107,.4)}
+@media (max-width:759px){
+  .bundle-tag{font-size:15px}
+  .bundle-new{font-size:18px}
+  .bundle-meta{font-size:11px}
+  .bundle-option{padding:12px 14px;gap:10px}
+  .bundle-radio{width:18px;height:18px}
+}
 
 .cta-row{display:flex;gap:10px;flex-wrap:wrap}
 .cta-row.center{justify-content:center}
@@ -146,6 +206,46 @@ strong{color:#fff}
 .float-tag-1{top:18%;left:-4px;animation:floatY 4s ease-in-out infinite}
 .float-tag-2{bottom:14%;right:-6px;animation:floatY 5s ease-in-out infinite reverse}
 @keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
+/* ===== how it works ===== */
+.how{padding:64px 0;background:var(--bg)}
+.how h2{margin-bottom:6px}
+.how-grid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:28px}
+.how-step{
+  background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;
+  position:relative;
+  transition:transform .25s ease, border-color .25s ease;
+}
+.how-step:hover{transform:translateY(-3px);border-color:rgba(255,177,74,.4)}
+.how-num{
+  font-family:var(--display);font-weight:800;font-size:40px;line-height:1;
+  background:linear-gradient(90deg,#ff3b6b,#ffb14a);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  margin-bottom:10px;
+}
+.how-step h3{font-size:18px;margin-bottom:8px}
+.how-step p{color:var(--muted);font-size:14px;margin:0}
+
+/* ===== for-you-if ===== */
+.foryou{padding:64px 0;background:var(--bg);border-top:1px solid var(--line)}
+.foryou h2{margin-bottom:18px}
+.foryou-list{list-style:none;padding:0;margin:0;display:grid;gap:12px;max-width:680px}
+.foryou-list li{
+  display:flex;gap:12px;align-items:flex-start;
+  background:var(--card);border:1px solid var(--line);
+  padding:14px 16px;border-radius:12px;font-size:15px;color:#dfe1ec;
+}
+.foryou-list .check{
+  flex:0 0 auto;width:22px;height:22px;line-height:22px;text-align:center;
+  border-radius:50%;background:rgba(34,197,94,.15);color:#22c55e;
+  font-weight:700;font-size:13px;margin-top:1px;
+}
+
+/* ===== why subhead ===== */
+.why-sub{margin:0 0 18px;max-width:560px}
+
+/* ===== final-trust line ===== */
+.final-trust{font-size:13px;color:var(--muted);margin-top:18px;position:relative;z-index:1}
 
 /* ===== ticker ===== */
 .ticker{
@@ -378,6 +478,8 @@ strong{color:#fff}
   .hero-grid{grid-template-columns:1.1fr .9fr;gap:48px}
   .ugc-grid{grid-template-columns:repeat(3,1fr);gap:16px}
   .why-grid{grid-template-columns:repeat(4,1fr);gap:16px}
+  .how-grid{grid-template-columns:repeat(3,1fr);gap:18px}
+  .foryou-list{grid-template-columns:1fr 1fr;max-width:none}
   .comic-grid{grid-template-columns:1fr 80px 1fr}
   .comic-arrow{transform:none}
   .sticky-cta{display:none}
@@ -424,7 +526,10 @@ strong{color:#fff}
   .bg-blob-2{bottom:-140px;left:-120px}
 
   /* sections */
-  .ugc-wall,.why,.faq,.reviews,.comic{padding:48px 0}
+  .ugc-wall,.why,.faq,.reviews,.comic,.how,.foryou{padding:48px 0}
+  .how-step{padding:18px;border-radius:14px}
+  .how-num{font-size:32px}
+  .foryou-list li{padding:12px 14px;font-size:14px}
   .ugc-wall h2{font-size:26px}
   .ugc-grid{gap:10px}
   .hook{font-size:13px}

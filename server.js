@@ -6,12 +6,14 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 const PUBLIC_URL = process.env.PUBLIC_URL || `http://localhost:${PORT}`;
-const WHATSAPP_NUMBER = process.env.WHATSAPP_NUMBER || '923341271461';
 
-const stripeKey = process.env.STRIPE_SECRET_KEY;
-const stripe = stripeKey && stripeKey.startsWith('sk_')
-  ? require('stripe')(stripeKey)
-  : null;
+const SHOPIFY_DOMAIN = process.env.SHOPIFY_DOMAIN || '';
+const SHOPIFY_VARIANTS = {
+  single: process.env.SHOPIFY_VARIANT_SINGLE || '',
+  double: process.env.SHOPIFY_VARIANT_DOUBLE || '',
+  triple: process.env.SHOPIFY_VARIANT_TRIPLE || '',
+};
+const SHOPIFY_DISCOUNT = process.env.SHOPIFY_DISCOUNT_CODE || '';
 
 // On Vercel only /tmp is writable; locally we keep events under ./data
 const DATA_DIR = process.env.VERCEL ? '/tmp/cleanspin' : path.join(__dirname, 'data');
@@ -29,22 +31,20 @@ app.use('/videos', express.static(path.join(__dirname, 'videos'), { maxAge: '7d'
 
 app.get('/api/config', (_req, res) => {
   res.json({
-    whatsappNumber: WHATSAPP_NUMBER,
-    whatsappMessage: 'I want to order Electric Spin Cleaning Brush',
-    stripeEnabled: Boolean(stripe),
+    shopifyDomain: SHOPIFY_DOMAIN,
+    variants: SHOPIFY_VARIANTS,
+    discount: SHOPIFY_DISCOUNT,
   });
 });
 
 const ALLOWED_EVENTS = new Set([
   'page_view',
   'click_buy',
-  'click_whatsapp',
   'add_to_cart',
   'begin_checkout',
-  'purchase',
+  'select_bundle',
   'video_play',
   'faq_open',
-  'checkout_canceled',
 ]);
 
 app.post('/api/track', (req, res) => {
@@ -63,52 +63,6 @@ app.post('/api/track', (req, res) => {
     if (err) console.warn('append failed:', err.message);
     res.json({ ok: true });
   });
-});
-
-app.post('/api/checkout', async (req, res) => {
-  if (!stripe) {
-    return res.status(503).json({
-      ok: false,
-      error: 'stripe_not_configured',
-      message: 'Set STRIPE_SECRET_KEY in .env to enable checkout. Use WhatsApp fallback meanwhile.',
-    });
-  }
-  try {
-    const priceId = process.env.STRIPE_PRICE_ID;
-    const lineItem = priceId
-      ? { price: priceId, quantity: 1 }
-      : {
-          price_data: {
-            currency: 'usd',
-            product_data: {
-              name: 'Electric Spin Cleaning Brush',
-              description: 'Cordless rotating scrubber — 4 brush heads included.',
-            },
-            unit_amount: 2999,
-          },
-          quantity: 1,
-        };
-
-    const session = await stripe.checkout.sessions.create({
-      mode: 'payment',
-      payment_method_types: ['card'],
-      line_items: [lineItem],
-      shipping_address_collection: { allowed_countries: ['US', 'CA', 'GB', 'AU', 'PK', 'AE', 'SA'] },
-      success_url: `${PUBLIC_URL}/?paid=1&session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${PUBLIC_URL}/?canceled=1`,
-    });
-
-    fs.appendFile(
-      EVENTS_FILE,
-      JSON.stringify({ ts: new Date().toISOString(), event: 'begin_checkout', props: { sessionId: session.id } }) + '\n',
-      () => {}
-    );
-
-    res.json({ ok: true, url: session.url });
-  } catch (err) {
-    console.error('checkout error', err.message);
-    res.status(500).json({ ok: false, error: err.message });
-  }
 });
 
 function readEvents() {
@@ -134,22 +88,19 @@ app.get('/api/metrics.json', (_req, res) => {
   }, {});
   const pageViews = counts.page_view || 0;
   const buyClicks = counts.click_buy || 0;
-  const waClicks = counts.click_whatsapp || 0;
-  const purchases = counts.purchase || 0;
+  const beginCheckouts = counts.begin_checkout || 0;
   res.json({
     totals: counts,
     pageViews,
     buyClicks,
-    whatsappClicks: waClicks,
-    whatsappCTR: pageViews ? +(waClicks / pageViews * 100).toFixed(2) : 0,
+    beginCheckouts,
     buyCTR: pageViews ? +(buyClicks / pageViews * 100).toFixed(2) : 0,
-    conversionRate: pageViews ? +(purchases / pageViews * 100).toFixed(2) : 0,
-    sales: purchases,
+    checkoutCTR: pageViews ? +(beginCheckouts / pageViews * 100).toFixed(2) : 0,
     eventsLogged: events.length,
   });
 });
 
-// Prometheus exposition format — scrape this with Prometheus, then visualize in Grafana.
+// Prometheus exposition format — scrape with Prometheus, visualize in Grafana.
 app.get('/metrics', (_req, res) => {
   const events = readEvents();
   const counts = events.reduce((acc, e) => {
@@ -162,11 +113,6 @@ app.get('/metrics', (_req, res) => {
   for (const [name, count] of Object.entries(counts)) {
     lines.push(`store_events_total{event="${name}"} ${count}`);
   }
-  const pv = counts.page_view || 0;
-  const purchases = counts.purchase || 0;
-  lines.push('# HELP store_conversion_rate Purchases divided by page views (0-1)');
-  lines.push('# TYPE store_conversion_rate gauge');
-  lines.push(`store_conversion_rate ${pv ? (purchases / pv).toFixed(4) : 0}`);
   res.set('Content-Type', 'text/plain; version=0.0.4');
   res.send(lines.join('\n') + '\n');
 });
@@ -175,11 +121,11 @@ app.get('/admin/metrics', (_req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'admin.html'));
 });
 
-// Locally: start the listener. On Vercel: export the handler instead.
 if (!process.env.VERCEL) {
   app.listen(PORT, () => {
-    console.log(`Store running on ${PUBLIC_URL}`);
-    console.log(`Stripe: ${stripe ? 'enabled' : 'DISABLED (set STRIPE_SECRET_KEY)'}`);
+    console.log(`CleanSpin running on ${PUBLIC_URL}`);
+    console.log(`Shopify: ${SHOPIFY_DOMAIN || 'NOT CONFIGURED — set SHOPIFY_DOMAIN'}`);
+    console.log(`Variants: single=${SHOPIFY_VARIANTS.single || '—'} double=${SHOPIFY_VARIANTS.double || '—'} triple=${SHOPIFY_VARIANTS.triple || '—'}`);
     console.log(`Metrics:  ${PUBLIC_URL}/metrics  (Prometheus)`);
     console.log(`Dashboard: ${PUBLIC_URL}/admin/metrics`);
   });
