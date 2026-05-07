@@ -15,6 +15,12 @@
     } catch (e) { /* silent */ }
   }
 
+  // TikTok Pixel — fires standard events for ad optimization.
+  // ttq is loaded via the base pixel snippet in index.html <head>.
+  function tt(event, props = {}) {
+    try { if (window.ttq && typeof window.ttq.track === 'function') window.ttq.track(event, props); } catch (e) { /* silent */ }
+  }
+
   // ---------- runtime config (from /api/config) ----------
   const config = { shopifyDomain: '', variants: {}, discount: '' };
   let configPromise = null;
@@ -111,6 +117,21 @@
       return;
     }
     track('begin_checkout', { tier: selectedBundle });
+
+    // Fire TikTok Pixel standard events (AddToCart + InitiateCheckout)
+    // before navigating, so they reach TikTok before the page unloads.
+    const variantId = (config.variants && (config.variants[selectedBundle] || config.variants.single)) || '';
+    const ttPayload = {
+      content_id: variantId || `cleanspin-${selectedBundle}`,
+      content_type: 'product',
+      content_name: `CleanSpin ${b.label}`,
+      quantity: b.qty,
+      value: b.price,
+      currency: 'USD',
+    };
+    tt('AddToCart', ttPayload);
+    tt('InitiateCheckout', ttPayload);
+
     window.location.href = url;
   }
 
